@@ -1,8 +1,8 @@
 ## Notes API Typescript And Express
-A complete, secure, and efficient API built with TypeScript, Express, and MongoDB as the database, featuring protected routes and implementing JsonWebToken for user and session authentication.
+A complete, secure, and efficient API built with TypeScript, Express, and MongoDB as the database, featuring protected routes and implementing jsWebToken for user and session authentication.
 ### EndPoints
 1. ```/api/users```
-```json
+```js
 // method POST
 // status code 201
 {
@@ -10,7 +10,7 @@ A complete, secure, and efficient API built with TypeScript, Express, and MongoD
 }
 ```
 2. ```/api/users/login```
-```json
+```js
 // method POST
 {
     "message": "User Authenticated Correctly"
@@ -18,7 +18,7 @@ A complete, secure, and efficient API built with TypeScript, Express, and MongoD
 // created cookie access_token and cookie name
 ```
 3. ```/api/notes```
-```json
+```js
 //user's note list
 // method GET
 //example
@@ -43,7 +43,7 @@ A complete, secure, and efficient API built with TypeScript, Express, and MongoD
 }
 ```
 5. ```/api/notes/:id```
-```json
+```js
 // method DELETE
 //Delete the note that matches the specified id only if it belongs to the authenticated user
 {
@@ -52,7 +52,7 @@ A complete, secure, and efficient API built with TypeScript, Express, and MongoD
 }
 ```
 6. ```/api/notes/:id```
-```json
+```js
 // method PUT
 //update the note that matches the specified id only if it belongs to the authenticated user
 {
@@ -65,7 +65,7 @@ A complete, secure, and efficient API built with TypeScript, Express, and MongoD
 }
 ```
 7. ```/api/notes/tags```
-```json
+```js
 // method GET
 //Returns the notes that match any of the tags passed as parameters.
     //example /api/notes/tags/?tags=Videogames
@@ -86,7 +86,7 @@ A complete, secure, and efficient API built with TypeScript, Express, and MongoD
     //required cookie access_token
 ```
 8. ```/api/notes/get-tags```
-```json
+```js
 //returns an array with all unique tags from the authenticated user's notes
 ["Videogames", "Entertainment", "Studies"]
 ```
