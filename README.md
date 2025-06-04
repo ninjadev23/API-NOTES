@@ -22,12 +22,20 @@ A complete, secure, and efficient API built with TypeScript, Express, and MongoD
 //user's note list
 // method GET
 //example
-{
-    "title": "example",
-    "content":"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed euismod, urna eu tincidunt.....", 
-    "tags": ["Videogames", "Entertainment"],
-    "important":true
-}
+[
+    {
+        "title": "Example1234",
+        "content":"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed euismod, urna eu tincidunt.....", 
+        "tags": ["Videogames", "Entertainment"],
+        "important":false
+    },
+    {
+        "title": "Note 123123 example",
+        "content":"I like typescript and express", 
+        "tags": [],
+        "important":true
+    }
+]
 ```
 4. ```/api/notes```
 ```ts
@@ -44,6 +52,23 @@ A complete, secure, and efficient API built with TypeScript, Express, and MongoD
 ```
 5. ```/api/notes/:id```
 ```js
+// method GET
+//returns the note that matches the specified id only if it belongs to the authenticated user
+//example
+{
+  "_id": "683ddd811d0df34817887e78",
+  "title": "Mangas que me gustan",
+  "content": "Vagabond, Berserk, Viland Saga",
+  "tags": [
+    "Lectura",
+    "Entretenimiento"
+  ],
+  "important": false,
+  "userID": "(id of user)",
+}
+```
+6. ```/api/notes/:id```
+```js
 // method DELETE
 //Delete the note that matches the specified id only if it belongs to the authenticated user
 {
@@ -51,7 +76,7 @@ A complete, secure, and efficient API built with TypeScript, Express, and MongoD
     //required cookie access_token
 }
 ```
-6. ```/api/notes/:id```
+7. ```/api/notes/:id```
 ```js
 // method PUT
 //update the note that matches the specified id only if it belongs to the authenticated user
@@ -64,7 +89,7 @@ A complete, secure, and efficient API built with TypeScript, Express, and MongoD
     //required cookie access_token
 }
 ```
-7. ```/api/notes/tags```
+8. ```/api/notes/tags```
 ```js
 // method GET
 //Returns the notes that match any of the tags passed as parameters.
@@ -85,7 +110,7 @@ A complete, secure, and efficient API built with TypeScript, Express, and MongoD
 ]
     //required cookie access_token
 ```
-8. ```/api/notes/get-tags```
+9. ```/api/notes/get-tags```
 ```js
 //returns an array with all unique tags from the authenticated user's notes
 ["Videogames", "Entertainment", "Studies"]
