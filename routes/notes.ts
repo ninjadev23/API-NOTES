@@ -1,7 +1,7 @@
 import { Router } from "express";
 import { NoteModel } from "../models/Notes";
 import { NoteSchema, Note, HttpError } from "../types";
-import { verifySession } from "../utils";
+import { handleError, verifySession } from "../utils";
 const router = Router()
 
 router.get("/", async (req, res) => {
@@ -12,8 +12,7 @@ router.get("/", async (req, res) => {
         })
         res.status(200).json(Notes)
     } catch (err) {
-        res.status((err instanceof HttpError && err.status) || 400)
-        .send((err as Error).message);
+        handleError(res, (err as Error));
     }
 })
 
@@ -28,8 +27,7 @@ router.post("/", async (req, res) => {
         const NoteSaved = await newNote.save()
         res.json(NoteSaved)
     } catch (err) {
-        res.status((err instanceof HttpError && err.status) || 400)
-        .send((err as Error).message);
+        handleError(res, (err as Error));
     }
 })
 
@@ -45,8 +43,7 @@ router.delete("/:id",async (req, res)=>{
         if(Note === null) throw new HttpError("Note not found", 404)
         else res.json({message: "Deleted"})
     }catch (err) {
-        res.status((err instanceof HttpError && err.status) || 400)
-        .send((err as Error).message);
+        handleError(res, (err as Error));
     }
 })
 
@@ -67,8 +64,7 @@ router.put("/:id", async (req, res)=>{
     )
         res.json(Note)
     }catch (err) {
-        res.status((err instanceof HttpError && err.status) || 400)
-        .send((err as Error).message);
+        handleError(res, (err as Error));
     }
 })
 
@@ -85,8 +81,7 @@ router.get("/tags", async (req, res)=>{
         })
         res.json(Notes)
     }catch (err) {
-        res.status((err instanceof HttpError && err.status) || 400)
-        .send((err as Error).message);
+        handleError(res, (err as Error));
     }
 })
 
@@ -105,8 +100,7 @@ router.get("/get-tags", async (req, res)=>{
         res.json(tags)
     }
     catch (err) {
-        res.status((err instanceof HttpError && err.status) || 400)
-        .send((err as Error).message);
+        handleError(res, (err as Error));
     }
 })
 //Esta ruta va de ultimo para no tener conflicto con otras,
@@ -123,8 +117,7 @@ router.get("/:id", async (req, res) => {
         if(Note === null) res.status(404).send("404 Not Found")
         else res.status(200).json(Note)
     } catch (err) {
-        res.status((err instanceof HttpError && err.status) || 400)
-        .send((err as Error).message);
+        handleError(res, (err as Error));
     }
 })
 export default router
