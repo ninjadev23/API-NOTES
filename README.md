@@ -1,0 +1,92 @@
+## Notes API Typescript And Express
+A complete, secure, and efficient API built with TypeScript, Express, and MongoDB as the database, featuring protected routes and implementing JsonWebToken for user and session authentication.
+### EndPoints
+1. ```/api/users```
+```json
+// method POST
+// status code 201
+{
+    "message": "New User Created!"
+}
+```
+2. ```/api/users/login```
+```json
+// method POST
+{
+    "message": "User Authenticated Correctly"
+}
+// created cookie access_token and cookie name
+```
+3. ```/api/notes```
+```json
+//user's note list
+// method GET
+//example
+{
+    "title": "example",
+    "content":"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed euismod, urna eu tincidunt.....", 
+    "tags": ["Videogames", "Entertainment"],
+    "important":true
+}
+```
+4. ```/api/notes```
+```ts
+// create note of user
+// method POST
+// Entry in body:
+{
+    "title": string,
+    "content": string, 
+    "tags": string[],
+    "important": boolean
+    //required cookie access_token
+}
+```
+5. ```/api/notes/:id```
+```json
+// method DELETE
+//Delete the note that matches the specified id only if it belongs to the authenticated user
+{
+    "message": "Deleted"
+    //required cookie access_token
+}
+```
+6. ```/api/notes/:id```
+```json
+// method PUT
+//update the note that matches the specified id only if it belongs to the authenticated user
+{
+    //new note
+    "title": "Example1234",
+    "content":"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed euismod, urna eu tincidunt.....", 
+    "tags": ["Videogames", "Entertainment"],
+    "important":false
+    //required cookie access_token
+}
+```
+7. ```/api/notes/tags```
+```json
+// method GET
+//Returns the notes that match any of the tags passed as parameters.
+    //example /api/notes/tags/?tags=Videogames
+[
+    {
+        "title": "Example1234",
+        "content":"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed euismod, urna eu tincidunt.....", 
+        "tags": ["Videogames", "Entertainment"],
+        "important":false
+    },
+    {
+        "title": "Note 45 example",
+        "content":"I like the videogames", 
+        "tags": ["Videogames"],
+        "important":true
+    }
+]
+    //required cookie access_token
+```
+8. ```/api/notes/get-tags```
+```json
+//returns an array with all unique tags from the authenticated user's notes
+["Videogames", "Entertainment", "Studies"]
+```
