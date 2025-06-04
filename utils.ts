@@ -14,11 +14,11 @@ export const handleError = (res: Response, err: HttpError | Error): void =>{
             path: e.path,
             message: e.message
         }));
-        res.status(400).json({ error: errors, status: 400 });
+        res.status(400).json({ message: errors, status: 400 });
     }else{
         const statusCode = (err instanceof HttpError && err.status) || 400;
         res.status(statusCode).json({
-            error: err.message,
+            message: err.message,
             status: statusCode
         });
     }
