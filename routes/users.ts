@@ -4,6 +4,7 @@ import { userSchema } from "../types";
 import {z} from "zod";
 import bcrypt from "bcryptjs"
 import jwt from "jsonwebtoken"
+import { handleError } from "../utils";
 
 const router = Router()
 
@@ -19,7 +20,7 @@ router.post("/",async (req, res)=>{
         })
         
     }catch(err){
-        res.status(400).send((err as Error).message)
+        handleError(res, (err as Error));
     }
 })
 router.post("/login", async (req, res)=>{
@@ -47,7 +48,7 @@ router.post("/login", async (req, res)=>{
             })
         }
     }catch(err){
-        res.status(400).send((err as Error).message)
+        handleError(res, (err as Error));
     }
 })
 export default router
