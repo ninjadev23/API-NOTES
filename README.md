@@ -115,3 +115,10 @@ A complete, secure, and efficient API built with TypeScript, Express, and MongoD
 //returns an array with all unique tags from the authenticated user's notes
 ["Videogames", "Entertainment", "Studies"]
 ```
+10. ```/api/users/logout```
+```js
+//delete client cookies access_token and name
+{
+    message: "User Logged Out"
+}
+```

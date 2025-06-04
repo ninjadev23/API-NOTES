@@ -51,4 +51,14 @@ router.post("/login", async (req, res)=>{
         handleError(res, (err as Error));
     }
 })
+router.delete("/logout", (_req, res)=>{
+    try{
+        res.clearCookie("name")
+        res.clearCookie("access_token").json({
+            message: "User Logged Out"
+        })
+    }catch(err){
+        handleError(res, (err as Error));
+    }
+})
 export default router
