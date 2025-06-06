@@ -12,13 +12,13 @@ export const handleError = (res: Response, err: HttpError | Error): void =>{
         // Formatea los errores de Zod para mayor legibilidad
         const errors = err.errors.map(e => ({
             path: e.path,
-            message: e.message
+            error: e.message
         }));
-        res.status(400).json({ message: errors, status: 400 });
+        res.status(400).json({ error: errors, status: 400 });
     }else{
         const statusCode = (err instanceof HttpError && err.status) || 400;
         res.status(statusCode).json({
-            message: err.message,
+            error: err.message,
             status: statusCode
         });
     }

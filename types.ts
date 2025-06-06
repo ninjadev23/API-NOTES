@@ -21,8 +21,8 @@ export interface NoteDocument extends Note, Document{
 export type UserSession = Pick<NoteDocument, "userID">
 export class HttpError extends Error {// Custom error class for HTTP errors
     status: number;
-    constructor(message: string, status: number) {
-        super(message);
+    constructor(error: string, status: number) {
+        super(error);
         this.status = status;
     }
 }
