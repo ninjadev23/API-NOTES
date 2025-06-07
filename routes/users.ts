@@ -41,8 +41,8 @@ router.post("/login", async (req, res)=>{
             res.cookie("name", userData.name)
             res.cookie("access_token",token, {
                 httpOnly: true, //opcion que hace que esta cookie solo la pueda leer el servidor
-                secure: process.env.NODE_ENV === "production",
-                sameSite: "none"//Sino se activa esto el frontend rechaza las cookies por estar en diferentes sitos
+                secure: process.env.NODE_ENV_FOR_SECURE === "production",
+                sameSite: "none" //Sino se activa esto el frontend rechaza las cookies por estar en diferentes sitios
             }).json({
                 message: "User Authenticated Correctly"
             })
