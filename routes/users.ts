@@ -38,14 +38,21 @@ router.post("/login", async (req, res)=>{
             },(process.env.SECRET_KEY as string),{
                 expiresIn: "20d" //fecha de expiracion del token 20 dias
             })
-            res.cookie("name", userData.name)
+            const cookiesConfig = {
+                maxAge: 1000 * 60 * 60 * 24 * 20, // 20 días
+                secure: process.env.NODE_ENV_FOR_SECURE === "production",
+                sameSite: "none" as const, //Sino se activa esto el frontend rechaza las cookies por estar en diferentes sitios
+                
+            }
+            res.cookie("name", userData.name, {...cookiesConfig})
             res.cookie("access_token",token, {
                 httpOnly: true, //opcion que hace que esta cookie solo la pueda leer el servidor
-                secure: process.env.NODE_ENV_FOR_SECURE === "production",
-                sameSite: "none" //Sino se activa esto el frontend rechaza las cookies por estar en diferentes sitios
+                ...cookiesConfig
             }).json({
                 message: "User Authenticated Correctly"
             })
+        }else{
+            throw new Error("Incorrect password")
         }
     }catch(err){
         handleError(res, (err as Error));

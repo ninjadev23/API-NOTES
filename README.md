@@ -1,6 +1,6 @@
 ## Notes API Typescript And Express
 A complete, secure, and efficient API built with TypeScript, Express, and MongoDB as the database, featuring protected routes and implementing jsWebToken for user and session authentication.
-### URL: https://api-notes-e6mf.onrender.com
+
 ### EndPoints
 1. ```/api/users```
 ```js
@@ -113,12 +113,14 @@ A complete, secure, and efficient API built with TypeScript, Express, and MongoD
 ```
 9. ```/api/notes/get-tags```
 ```js
+//method: get
 //returns an array with all unique tags from the authenticated user's notes
 ["Videogames", "Entertainment", "Studies"]
 ```
 10. ```/api/users/logout```
 ```js
 //delete client cookies access_token and name
+//method: delete
 {
     message: "User Logged Out"
 }
