@@ -18,7 +18,7 @@ app.use(cors({
   origin: "http://localhost:5173",
   credentials: true
 }));
-app.use("/api/users", UserRouter)
+app.use("/api", UserRouter)
 app.use("/api/notes", NoteRouter)
 const PORT = process.env.PORT || 3000
 app.listen(PORT, ()=>console.log(`Application running on http://localhost:${PORT}`))

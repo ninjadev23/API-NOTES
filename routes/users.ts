@@ -8,7 +8,14 @@ import { handleError } from "../utils";
 
 const router = Router()
 
-router.post("/",async (req, res)=>{
+ const cookiesConfig = {//Configuracion general de las cookies
+    maxAge: 1000 * 60 * 60 * 24 * 20, // 20 días
+    secure: process.env.NODE_ENV_FOR_SECURE === "production",
+    sameSite: "none" as const, //Sino se activa esto el frontend rechaza las cookies por estar en diferentes sitios
+                
+}
+
+router.post("/signup",async (req, res)=>{
     try{
         // Validando entrada
         const userValided = userSchema.parse(req.body)    
@@ -38,12 +45,6 @@ router.post("/login", async (req, res)=>{
             },(process.env.SECRET_KEY as string),{
                 expiresIn: "20d" //fecha de expiracion del token 20 dias
             })
-            const cookiesConfig = {
-                maxAge: 1000 * 60 * 60 * 24 * 20, // 20 días
-                secure: process.env.NODE_ENV_FOR_SECURE === "production",
-                sameSite: "none" as const, //Sino se activa esto el frontend rechaza las cookies por estar en diferentes sitios
-                
-            }
             res.cookie("name", userData.name, {...cookiesConfig})
             res.cookie("access_token",token, {
                 httpOnly: true, //opcion que hace que esta cookie solo la pueda leer el servidor
@@ -58,14 +59,18 @@ router.post("/login", async (req, res)=>{
         handleError(res, (err as Error));
     }
 })
-router.delete("/logout", (_req, res)=>{
-    try{
-        res.clearCookie("name")
-        res.clearCookie("access_token").json({
+router.delete("/logout", (_req, res) => {
+    try {
+        res.clearCookie("name", cookiesConfig);
+        res.clearCookie("access_token", {
+            httpOnly: true,
+            ...cookiesConfig
+        });
+        res.json({
             message: "User Logged Out"
-        })
-    }catch(err){
+        });
+    } catch (err) {
         handleError(res, (err as Error));
     }
-})
+});
 export default router

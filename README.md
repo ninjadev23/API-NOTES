@@ -2,7 +2,7 @@
 A complete, secure, and efficient API built with TypeScript, Express, and MongoDB as the database, featuring protected routes and implementing jsWebToken for user and session authentication.
 
 ### EndPoints
-1. ```/api/users```
+1. ```/api/signup```
 ```js
 // method POST
 // status code 201
@@ -10,7 +10,7 @@ A complete, secure, and efficient API built with TypeScript, Express, and MongoD
     "message": "New User Created!"
 }
 ```
-2. ```/api/users/login```
+2. ```/api/login```
 ```js
 // method POST
 {
@@ -117,7 +117,7 @@ A complete, secure, and efficient API built with TypeScript, Express, and MongoD
 //returns an array with all unique tags from the authenticated user's notes
 ["Videogames", "Entertainment", "Studies"]
 ```
-10. ```/api/users/logout```
+10. ```/api/logout```
 ```js
 //delete client cookies access_token and name
 //method: delete
