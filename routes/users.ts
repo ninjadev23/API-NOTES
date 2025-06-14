@@ -48,7 +48,11 @@ router.post("/login", async (req, res) => {
           expiresIn: "20d", //fecha de expiracion del token 20 dias
         }
       );
-      res.cookie("name", userData.name, { httpOnly: false, ...cookiesConfig });
+      res.cookie("name", userData.name, {
+        maxAge: 1000 * 60 * 60 * 24 * 20,
+        sameSite: "lax",
+        secure: false,
+      });
       res
         .cookie("access_token", token, {
           httpOnly: true, //opcion que hace que esta cookie solo la pueda leer el servidor
