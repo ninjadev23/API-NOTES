@@ -13,7 +13,15 @@ const app = express()
 app.use(morgan("dev"))
 app.use(express.json())
 app.use(cookieParser())
-
+app.use((req, _res, next) => {
+  if (
+    (req.method === "DELETE" || req.method === "GET") &&
+    req.headers["content-length"] === "0"
+  ) {
+    return next();
+  }
+  return next();
+});
 app.use(cors({
   origin: "http://localhost:5173",
   credentials: true,
