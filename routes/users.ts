@@ -10,6 +10,7 @@ const router = Router();
 
 const cookiesConfig = {
   //Configuracion general de las cookies
+  httpOnly: true,//hace que la cookie solo pueda ser leida por el sevidor y no por javascript
   maxAge: 1000 * 60 * 60 * 24 * 20, // 20 días
   secure: process.env.NODE_ENV_FOR_SECURE === "production",
   sameSite: "none" as const, //Sino se activa esto el frontend rechaza las cookies por estar en diferentes sitios
@@ -48,15 +49,9 @@ router.post("/login", async (req, res) => {
           expiresIn: "20d", //fecha de expiracion del token 20 dias
         }
       );
-      res.cookie("name", userData.name, {
-        maxAge: 1000 * 60 * 60 * 24 * 20,
-        sameSite: "lax",
-        secure: false,
-      });
       res
         .cookie("access_token", token, {
-          httpOnly: true, //opcion que hace que esta cookie solo la pueda leer el servidor
-          ...cookiesConfig,
+            ...cookiesConfig,
         })
         .json({
           message: "User Authenticated Correctly",
@@ -70,9 +65,7 @@ router.post("/login", async (req, res) => {
 });
 router.delete("/logout", (_req, res) => {
   try {
-    res.clearCookie("name", cookiesConfig);
     res.clearCookie("access_token", {
-      httpOnly: true,
       ...cookiesConfig,
     });
     res.json({
