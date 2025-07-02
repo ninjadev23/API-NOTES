@@ -13,8 +13,7 @@ const UserSchema = new Schema<User>({
     },
     password: {
         type: String,
-        required: true,
-        unique: true
+        required: true
     }
 })
 export const UserModel = model<User>("Users",UserSchema)

@@ -1,6 +1,6 @@
 ## Notes API Typescript And Express
 
-A complete, secure, and efficient API built with TypeScript, Express, and MongoDB as the database, featuring protected routes and implementing jsWebToken for user and session authentication.
+A complete, secure, and efficient API built with TypeScript, Express, and MongoDB as the database, featuring protected routes and implementing JsonWebToken for user and session authentication.
 
 ### EndPoints
 
